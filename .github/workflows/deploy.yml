@@ -13,11 +13,11 @@ permissions:
 
 jobs:
   deploy:
+    runs-on: ubuntu-latest
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
-    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
@@ -26,10 +26,21 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      - name: Check website files
+        run: |
+          echo "Repository:"
+          pwd
+          echo "Files:"
+          ls -la
+          echo "Guardiani:"
+          ls -la guardiani
+          echo "Dist:"
+          ls -la guardiani/dist
+
       - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./guardiani/dist
+          path: ${{ github.workspace }}/guardiani/dist
 
       - name: Deploy to GitHub Pages
         id: deployment
