@@ -1,4 +1,4 @@
-name: Deploy Guardiani
+name: Deploy GuardianAI
 
 on:
   push:
@@ -30,17 +30,20 @@ jobs:
         run: |
           echo "Repository:"
           pwd
-          echo "Files:"
+
+          echo "Root files:"
           ls -la
-          echo "Guardiani:"
-          ls -la guardiani
-          echo "Dist:"
-          ls -la guardiani/dist
+
+          echo "GuardianAI folder:"
+          ls -la guardianai
+
+          echo "Dist folder:"
+          ls -la guardianai/dist
 
       - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ github.workspace }}/guardiani/dist
+          path: ${{ github.workspace }}/guardianai/dist
 
       - name: Deploy to GitHub Pages
         id: deployment
